@@ -7,6 +7,7 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       apiKey: 'AIzaSyCSBv5xhW5-1log6inckfprlP9LeyPkKYQ'
     }),
     BrowserAnimationsModule,
+    MatIconModule,
     MatButtonModule
   ],
   providers: [],
