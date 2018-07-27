@@ -6,6 +6,9 @@ import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +18,9 @@ import { AgmCoreModule } from '@agm/core';
     BrowserModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCSBv5xhW5-1log6inckfprlP9LeyPkKYQ'
-    })
+    }),
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

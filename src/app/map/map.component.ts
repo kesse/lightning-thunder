@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { LatLngBounds } from '@agm/core';
 
 import { GeolocationService } from './geolocation.service';
 
@@ -44,7 +45,10 @@ export class MapComponent implements OnInit {
   }
 
   stopCounter() {
-    this.subscribtion.unsubscribe();
+    if (this.subscribtion) {
+      this.subscribtion.unsubscribe();
+      this.subscribtion = null;
+    }
   }
 
   calculateRadius() {

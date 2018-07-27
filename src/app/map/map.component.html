@@ -1,10 +1,31 @@
-<button (click)="startCounter()">Start</button>
-<button (click)="stopCounter()">Stop</button>
+<div class="middle-container">
+  <button 
+    *ngIf="!subscribtion"
+    mat-raised-button color="primary" 
+    (click)="startCounter()">
+    Blixt
+  </button>
 
-Tid: {{elipsedTime | number }} s
-Avstånd: {{radius | number }} m
+  <button 
+    *ngIf="subscribtion"
+    mat-raised-button color="primary" 
+    (click)="stopCounter()">
+    Åska
+  </button>
+
+  <div *ngIf="elipsedTime">
+    Tid: {{elipsedTime | number }} s
+    Avstånd: {{radius | number }} m
+  </div>
+</div>
 
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
   <agm-marker *ngIf="lat" [latitude]="lat" [longitude]="lng"></agm-marker>
-  <agm-circle *ngIf="lat" [latitude]="lat" [longitude]="lng" [radius]=radius [fillColor]="ff0000"></agm-circle>
+  <agm-circle 
+    *ngIf="lat" 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [radius]=radius 
+    [fillColor]="ff0000"
+  ></agm-circle>
 </agm-map>
