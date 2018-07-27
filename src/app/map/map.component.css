@@ -1,5 +1,11 @@
+:host {
+    flex: 1;
+    display: flex;
+}
+
 agm-map {
-    height: 100vh;
+    flex: 1;
+    height: 100%;
 }
 
 .middle-container {
