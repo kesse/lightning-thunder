@@ -10,11 +10,15 @@ import { GeolocationService } from './geolocation.service';
 })
 export class MapComponent implements OnInit {
 
-  lat: number | string = 1;
-  lng: number | string = 1;
-  zoom: number = 12;
-  radius: number = 1;
+  private soundSpeed = 1234.8 * 1000 / 60 / 60; // m/s 20 grader
+  private startTime: number;
+
+  lat: number | string;
+  lng: number | string;
+  zoom: number = 14;
+  radius: number = 0;
   subscribtion: Subscription;
+  elipsedTime: number;
 
   constructor(geolocationService: GeolocationService) {
     geolocationService.getLocation().subscribe((data) => {
@@ -23,23 +27,32 @@ export class MapComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   startCounter() {
-    this.radius = 1;
+    this.radius = 0;
+    this.elipsedTime = 0;
 
     if (this.subscribtion) {
       this.subscribtion.unsubscribe();
     }
 
-    const secondsCounter = interval(1);
-    this.subscribtion = secondsCounter.subscribe(n => this.radius++);
+    this.startTime = this.getTimeInSeconds();
+
+    const secondsCounter = interval(50);
+    this.subscribtion = secondsCounter.subscribe(n => this.calculateRadius());
   }
 
   stopCounter() {
     this.subscribtion.unsubscribe();
   }
 
+  calculateRadius() {
+    this.elipsedTime = this.getTimeInSeconds() - this.startTime;
+    this.radius = this.elipsedTime * this.soundSpeed;
+  }
+
+  getTimeInSeconds() {
+    return Date.now() / 1000;
+  }
 }
