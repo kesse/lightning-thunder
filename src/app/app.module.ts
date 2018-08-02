@@ -11,15 +11,21 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './menu/menu.component';
 import { LightningListComponent } from './lightning-list/lightning-list.component';
+import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
   {
     path: 'list',
     component: LightningListComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: '',
@@ -35,7 +41,8 @@ const appRoutes: Routes = [
     AppComponent,
     MapComponent,
     MenuComponent,
-    LightningListComponent
+    LightningListComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
