@@ -18,8 +18,8 @@ export class MapComponent implements OnInit {
 
   lat: number;
   lng: number;
-  zoom: number = 14;
-  radius: number = 0;
+  zoom = 14;
+  radius = 0;
   subscribtion: Subscription;
   elipsedTime: number;
 
