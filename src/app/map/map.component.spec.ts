@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { MaterialDesignModule } from '../material-design/material-design.module';
 import { AgmCoreModule } from '@agm/core';
 
 describe('MapComponent', () => {
@@ -12,7 +11,7 @@ describe('MapComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MapComponent ],
-      imports: [ MatIconModule, MatButtonModule, AgmCoreModule.forRoot() ]
+      imports: [ MaterialDesignModule, AgmCoreModule.forRoot() ]
     })
     .compileComponents();
   }));
