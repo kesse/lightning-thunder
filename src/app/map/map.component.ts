@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { LatLngBounds } from '@agm/core';
+import { StorageService } from '../storage.service';
 
 import { GeolocationService } from './geolocation.service';
+import { LightningModel, LocationModel } from '../models/lightning.model';
 
 @Component({
   selector: 'app-map',
@@ -13,19 +14,22 @@ export class MapComponent implements OnInit {
 
   private soundSpeed = 1234.8 * 1000 / 60 / 60; // m/s 20 grader
   private startTime: number;
+  private storageService: StorageService;
 
-  lat: number | string;
-  lng: number | string;
+  lat: number;
+  lng: number;
   zoom: number = 14;
   radius: number = 0;
   subscribtion: Subscription;
   elipsedTime: number;
 
-  constructor(geolocationService: GeolocationService) {
+  constructor(geolocationService: GeolocationService, storageService: StorageService) {
     geolocationService.getLocation().subscribe((data) => {
       this.lat = data.latitude;
       this.lng = data.longitude;
     });
+
+    this.storageService = storageService;
   }
 
   ngOnInit() {}
@@ -48,6 +52,20 @@ export class MapComponent implements OnInit {
     if (this.subscribtion) {
       this.subscribtion.unsubscribe();
       this.subscribtion = null;
+
+      const model = new LightningModel();
+      model.time = this.elipsedTime;
+      model.distance = this.radius;
+      model.date = Date.now();
+      model.location = new LocationModel();
+      model.location.lat = this.lat;
+      model.location.lng = this.lng;
+
+      const key = 'history';
+      const data = [];
+
+      data.push(model);
+      this.storageService.save(key, data);
     }
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../storage.service';
+import { LightningModel } from '../models/lightning.model';
 
 @Component({
   selector: 'app-lightning-list',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LightningListComponent implements OnInit {
 
-  constructor() { }
+  history: LightningModel[];
+
+  constructor(storageService: StorageService) {
+    const key = 'history';
+
+    const data = storageService.get(key);
+
+    if (data) {
+      this.history = data.map(d => {
+        return new LightningModel(d);
+      });
+    }
+  }
 
   ngOnInit() {
   }
