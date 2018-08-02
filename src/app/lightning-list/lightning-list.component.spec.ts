@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LightningListComponent } from './lightning-list.component';
+import { MatListModule } from '@angular/material/list';
 
 describe('LightningListComponent', () => {
   let component: LightningListComponent;
@@ -8,7 +9,8 @@ describe('LightningListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LightningListComponent ]
+      declarations: [ LightningListComponent ],
+      imports: [ MatListModule ]
     })
     .compileComponents();
   }));
