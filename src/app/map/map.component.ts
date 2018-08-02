@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { StorageService } from '../storage.service';
 
 import { GeolocationService } from './geolocation.service';
 import { LightningModel, LocationModel } from '../models/lightning.model';
+import { HistoryService } from './history.service';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
 
   private soundSpeed = 1234.8 * 1000 / 60 / 60; // m/s 20 grader
   private startTime: number;
-  private storageService: StorageService;
+  private historyService: HistoryService;
 
   lat: number;
   lng: number;
@@ -23,13 +23,13 @@ export class MapComponent implements OnInit {
   subscribtion: Subscription;
   elipsedTime: number;
 
-  constructor(geolocationService: GeolocationService, storageService: StorageService) {
+  constructor(geolocationService: GeolocationService, historyService: HistoryService) {
     geolocationService.getLocation().subscribe((data) => {
       this.lat = data.latitude;
       this.lng = data.longitude;
     });
 
-    this.storageService = storageService;
+    this.historyService = historyService;
   }
 
   ngOnInit() {}
@@ -53,19 +53,7 @@ export class MapComponent implements OnInit {
       this.subscribtion.unsubscribe();
       this.subscribtion = null;
 
-      const model = new LightningModel();
-      model.time = this.elipsedTime;
-      model.distance = this.radius;
-      model.date = Date.now();
-      model.location = new LocationModel();
-      model.location.lat = this.lat;
-      model.location.lng = this.lng;
-
-      const key = 'history';
-      const data = [];
-
-      data.push(model);
-      this.storageService.save(key, data);
+      this.store();
     }
   }
 
@@ -76,5 +64,17 @@ export class MapComponent implements OnInit {
 
   getTimeInSeconds() {
     return Date.now() / 1000;
+  }
+
+  private store() {
+    const model = new LightningModel();
+    model.time = this.elipsedTime;
+    model.distance = this.radius;
+    model.date = Date.now();
+    model.location = new LocationModel();
+    model.location.lat = this.lat;
+    model.location.lng = this.lng;
+
+    this.historyService.save(model);
   }
 }

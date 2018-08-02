@@ -1,19 +1,22 @@
 <mat-card>
   <mat-card-title>
-    Tidigare
+    Historik
   </mat-card-title>
 
   <mat-card-content>
     <mat-expansion-panel *ngFor="let data of history">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ data.date | date }}
+          {{ data.date | date : 'MMM d, y - HH:mm:ss'}}
         </mat-panel-title>
         <mat-panel-description>
           {{ data.distance | number }} m
           {{ data.time | number }} s
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      {{ data.location.lat }} 
+      {{ data.location.lng }}
     </mat-expansion-panel>
   </mat-card-content>
 </mat-card>
