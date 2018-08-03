@@ -31,6 +31,15 @@ export class HistoryService {
   public save(model: LightningModel) {
     this.history.push(model);
     this.storage.save(this.storageKey, this.history);
+
+    return this.history;
+  }
+
+  public remove(model: LightningModel) {
+    this.history = this.removeFromArray(this.history, model);
+    this.storage.save(this.storageKey, this.history);
+
+    return this.history;
   }
 
   /**
@@ -38,6 +47,10 @@ export class HistoryService {
    */
   public get() {
     return this.history;
+  }
+
+  private removeFromArray(array, element) {
+    return array.filter(e => e !== element);
   }
 
 }

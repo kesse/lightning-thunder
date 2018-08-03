@@ -8,14 +8,18 @@ import { HistoryService } from '../map/history.service';
   styleUrls: ['./lightning-list.component.css']
 })
 export class LightningListComponent implements OnInit {
-
+ 
   history: LightningModel[];
 
-  constructor(historyService: HistoryService) {
+  constructor(private historyService: HistoryService) {
     this.history = historyService.get().slice().reverse();
   }
 
   ngOnInit() {
+  }
+
+  remove(model: LightningModel) {
+    this.history = this.historyService.remove(model);
   }
 
 }
