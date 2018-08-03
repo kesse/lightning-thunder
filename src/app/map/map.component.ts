@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 
 import { GeolocationService } from './geolocation.service';
@@ -10,11 +10,12 @@ import { HistoryService } from './history.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
   private soundSpeed = 1234.8 * 1000 / 60 / 60; // m/s 20 grader
   private startTime: number;
   private historyService: HistoryService;
+  private geolocationSubscription: Subscription;
 
   lat: number;
   lng: number;
@@ -24,7 +25,7 @@ export class MapComponent implements OnInit {
   elipsedTime: number;
 
   constructor(geolocationService: GeolocationService, historyService: HistoryService) {
-    geolocationService.getLocation().subscribe((data) => {
+    this.geolocationSubscription = geolocationService.getLocation().subscribe((data) => {
       this.lat = data.latitude;
       this.lng = data.longitude;
     });
@@ -33,6 +34,10 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy()	{
+    this.geolocationSubscription.unsubscribe();
+  }
 
   startCounter() {
     this.radius = 0;
