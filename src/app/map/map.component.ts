@@ -14,7 +14,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private soundSpeed = 1234.8 * 1000 / 60 / 60; // m/s 20 grader
   private startTime: number;
-  private historyService: HistoryService;
   private geolocationSubscription: Subscription;
 
   lat: number;
@@ -24,16 +23,14 @@ export class MapComponent implements OnInit, OnDestroy {
   subscribtion: Subscription;
   elipsedTime: number;
 
-  constructor(geolocationService: GeolocationService, historyService: HistoryService) {
-    this.geolocationSubscription = geolocationService.getLocation().subscribe((data) => {
+  constructor(private geolocationService: GeolocationService, private historyService: HistoryService) {}
+
+  ngOnInit() {
+    this.geolocationSubscription = this.geolocationService.getLocation().subscribe((data) => {
       this.lat = data.latitude;
       this.lng = data.longitude;
     });
-
-    this.historyService = historyService;
   }
-
-  ngOnInit() {}
 
   ngOnDestroy()	{
     this.geolocationSubscription.unsubscribe();
