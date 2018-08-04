@@ -20,6 +20,7 @@ export class MapComponent implements OnInit, OnDestroy {
   lng: number;
   zoom = 14;
   radius = 0;
+  streetViewControl = false;
   subscribtion: Subscription;
   elipsedTime: number;
 

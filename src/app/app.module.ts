@@ -20,10 +20,6 @@ const appRoutes: Routes = [
     component: LightningListComponent
   },
   {
-    path: 'about',
-    component: AboutComponent
-  },
-  {
     path: '',
     component: MapComponent,
     pathMatch: 'full'
@@ -51,6 +47,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialDesignModule
   ],
+  entryComponents: [AboutComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
