@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AboutComponent } from '../about/about.component';
+import { LightningListComponent } from '../lightning-list/lightning-list.component';
 
 @Component({
   selector: 'app-menu',
@@ -16,5 +17,11 @@ export class MenuComponent implements OnInit {
 
   openAboutDialog(): void {
     this.dialog.open(AboutComponent, {});
+  }
+
+  openHistoryDialog(): void {
+    this.dialog.open(LightningListComponent, {
+      minWidth: '60vw'
+    });
   }
 }

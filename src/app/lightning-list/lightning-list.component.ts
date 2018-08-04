@@ -21,4 +21,8 @@ export class LightningListComponent implements OnInit {
     this.history = this.historyService.remove(model);
   }
 
+  clearAll() {
+    this.history = this.historyService.clear();
+  }
+
 }

@@ -5,7 +5,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
-    MatCardModule,
     MatDialogModule,
     MatExpansionModule
   ],
@@ -23,7 +21,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
-    MatCardModule,
     MatDialogModule,
     MatExpansionModule
   ]

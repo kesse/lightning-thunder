@@ -1,26 +1,28 @@
-<mat-card>
-  <mat-card-title>
-    Historik
-  </mat-card-title>
+<h2 mat-dialog-title>Historik</h2>
+<mat-dialog-content>
+  <mat-expansion-panel *ngFor="let data of history">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ data.date | date : 'MMM d, y - HH:mm:ss'}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ data.distance | number:'1.0-0' }} m
+        {{ data.time | number:'1.0-1' }} s
+      </mat-panel-description>
 
-  <mat-card-content>
-    <mat-expansion-panel *ngFor="let data of history">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ data.date | date : 'MMM d, y - HH:mm:ss'}}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ data.distance | number }} m
-          {{ data.time | number }} s
-        </mat-panel-description>
+      <button mat-icon-button (click)="remove(data)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-expansion-panel-header>
 
-        <button mat-icon-button (click)="remove(data)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-expansion-panel-header>
+    {{ data.location.lat }} 
+    {{ data.location.lng }}
+  </mat-expansion-panel>
+</mat-dialog-content>
 
-      {{ data.location.lat }} 
-      {{ data.location.lng }}
-    </mat-expansion-panel>
-  </mat-card-content>
-</mat-card>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="clearAll()">Rensa</button>
+  <button mat-button mat-dialog-close>Stäng</button>
+</mat-dialog-actions>
+  
+

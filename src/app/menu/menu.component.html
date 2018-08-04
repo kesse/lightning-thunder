@@ -1,7 +1,6 @@
 <mat-toolbar color="primary">
   <span>T/L</span>
   <span class="example-spacer"></span>
-  <button mat-button routerLink="/" routerLinkActive="active">Karta</button>
-  <button mat-button routerLink="/list" routerLinkActive="active">Tidigare</button>
+  <button mat-button  (click)="openHistoryDialog()">Historik</button>
   <button mat-button (click)="openAboutDialog()">Om</button>
 </mat-toolbar>

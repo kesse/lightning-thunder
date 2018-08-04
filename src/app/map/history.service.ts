@@ -32,6 +32,16 @@ export class HistoryService {
     return this.history;
   }
 
+  /**
+   * clear
+   */
+  public clear() {
+    this.history = [];
+    this.storageService.save(this.storageKey, this.history);
+
+    return this.history;
+  }
+
   public remove(model: LightningModel) {
     this.history = this.removeFromArray(this.history, model);
     this.storageService.save(this.storageKey, this.history);

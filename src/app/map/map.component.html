@@ -16,8 +16,8 @@
   </button>
 
   <div *ngIf="elipsedTime" class="info">
-    Tid: {{elipsedTime | number }} s
-    Avstånd: {{radius | number }} m
+    Tid: {{elipsedTime | number:'1.0-1' }} s
+    Avstånd: {{radius | number:'1.0-0' }} m
   </div>
 </div>
 
