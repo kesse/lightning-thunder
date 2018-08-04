@@ -15,19 +15,19 @@
     Åska
   </button>
 
-  <div *ngIf="elipsedTime" class="info">
-    Tid: {{elipsedTime | number:'1.0-1' }} s
-    Avstånd: {{radius | number:'1.0-0' }} m
+  <div *ngIf="model.time" class="info">
+    Tid: {{model.time | number:'1.0-1' }} s
+    Avstånd: {{model.distance | number:'1.0-0' }} m
   </div>
 </div>
 
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [streetViewControl]="streetViewControl">
-  <agm-marker *ngIf="lat" [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [latitude]="model.location.lat" [longitude]="model.location.lng" [zoom]="zoom" [streetViewControl]="streetViewControl">
+  <agm-marker *ngIf="model.location.lat" [latitude]="model.location.lat" [longitude]="model.location.lng"></agm-marker>
   <agm-circle 
-    *ngIf="lat" 
-    [latitude]="lat" 
-    [longitude]="lng" 
-    [radius]=radius 
+    *ngIf="model.location.lat" 
+    [latitude]="model.location.lat" 
+    [longitude]="model.location.lng" 
+    [radius]=model.distance
     fillColor="#ff0000"
   ></agm-circle>
 </agm-map>

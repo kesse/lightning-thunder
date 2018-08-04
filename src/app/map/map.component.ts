@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { GeolocationService } from './geolocation.service';
 import { LightningModel, LocationModel } from '../models/lightning.model';
 import { HistoryService } from './history.service';
+import { MapService } from './map.service';
 
 @Component({
   selector: 'app-map',
@@ -16,34 +17,40 @@ export class MapComponent implements OnInit, OnDestroy {
   private startTime: number;
   private geolocationSubscription: Subscription;
 
-  lat: number;
-  lng: number;
+  model: LightningModel;
   zoom = 14;
-  radius = 0;
   streetViewControl = false;
   subscribtion: Subscription;
-  elipsedTime: number;
 
-  constructor(private geolocationService: GeolocationService, private historyService: HistoryService) {}
+  constructor(private geolocationService: GeolocationService, private historyService: HistoryService, private mapService: MapService) {}
 
   ngOnInit() {
+    this.model = new LightningModel();
+
     this.geolocationSubscription = this.geolocationService.getLocation().subscribe((data) => {
-      this.lat = data.latitude;
-      this.lng = data.longitude;
+      this.model.location.lat = data.latitude;
+      this.model.location.lng = data.longitude;
     });
   }
 
   ngOnDestroy()	{
-    this.geolocationSubscription.unsubscribe();
-  }
-
-  startCounter() {
-    this.radius = 0;
-    this.elipsedTime = 0;
+    if (this.geolocationSubscription) {
+      this.geolocationSubscription.unsubscribe();
+    }
 
     if (this.subscribtion) {
       this.subscribtion.unsubscribe();
     }
+  }
+
+  startCounter() {
+    if (this.subscribtion) {
+      this.subscribtion.unsubscribe();
+    }
+
+    const oldModel = this.model;
+    this.model = new LightningModel();
+    this.model.location = new LocationModel(oldModel.location);
 
     this.startTime = this.getTimeInSeconds();
 
@@ -61,8 +68,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   calculateRadius() {
-    this.elipsedTime = this.getTimeInSeconds() - this.startTime;
-    this.radius = this.elipsedTime * this.soundSpeed;
+    this.model.time = this.getTimeInSeconds() - this.startTime;
+    this.model.distance = this.model.time * this.soundSpeed;
   }
 
   getTimeInSeconds() {
@@ -70,14 +77,9 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private store() {
-    const model = new LightningModel();
-    model.time = this.elipsedTime;
-    model.distance = this.radius;
-    model.date = Date.now();
-    model.location = new LocationModel();
-    model.location.lat = this.lat;
-    model.location.lng = this.lng;
+    const savedModel = this.model;
+    savedModel.date = Date.now();
 
-    this.historyService.save(model);
+    this.historyService.save(savedModel);
   }
 }

@@ -22,6 +22,10 @@ export class LightningModel {
             this.distance = data.distance;
             this.location = new LocationModel(data.location);
             this.time = data.time;
+        } else {
+            this.location = new LocationModel();
+            this.distance = 0;
+            this.time = 0;
         }
     }
 }
