@@ -9,14 +9,15 @@
         {{ data.distance | number:'1.0-0' }} m
         {{ data.time | number:'1.0-1' }} s
       </mat-panel-description>
-
-      <button mat-icon-button (click)="remove(data)">
-        <mat-icon>delete</mat-icon>
-      </button>
     </mat-expansion-panel-header>
 
-    {{ data.location.lat }} 
-    {{ data.location.lng }}
+    <button mat-icon-button (click)="showOnMap(data)">
+        <mat-icon>map</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="remove(data)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-expansion-panel>
 </mat-dialog-content>
 

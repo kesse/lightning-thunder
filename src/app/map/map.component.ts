@@ -21,15 +21,21 @@ export class MapComponent implements OnInit, OnDestroy {
   zoom = 14;
   streetViewControl = false;
   subscribtion: Subscription;
+  currentLocation = new LocationModel();
 
   constructor(private geolocationService: GeolocationService, private historyService: HistoryService, private mapService: MapService) {}
 
   ngOnInit() {
     this.model = new LightningModel();
+    this.model.location = this.currentLocation;
 
     this.geolocationSubscription = this.geolocationService.getLocation().subscribe((data) => {
-      this.model.location.lat = data.latitude;
-      this.model.location.lng = data.longitude;
+      this.currentLocation.lat = data.latitude;
+      this.currentLocation.lng = data.longitude;
+    });
+
+    this.mapService.change.subscribe(oldModel => {
+      this.model = oldModel;
     });
   }
 
@@ -50,7 +56,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     const oldModel = this.model;
     this.model = new LightningModel();
-    this.model.location = new LocationModel(oldModel.location);
+    this.model.location = new LocationModel(this.currentLocation);
 
     this.startTime = this.getTimeInSeconds();
 
