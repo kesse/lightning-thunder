@@ -17,7 +17,7 @@ export class LightningListComponent implements OnInit {
     private dialogRef: MatDialogRef<LightningListComponent>) {}
 
   ngOnInit() {
-    this.history = this.historyService.get().slice().reverse();
+    this.setHistory(this.historyService.get());
   }
 
   showOnMap(model: LightningModel) {
@@ -26,11 +26,17 @@ export class LightningListComponent implements OnInit {
   }
 
   remove(model: LightningModel) {
-    this.history = this.historyService.remove(model);
+    const history = this.historyService.remove(model);
+    this.setHistory(history);
   }
 
   clearAll() {
-    this.history = this.historyService.clear();
+    const history = this.historyService.clear();
+    this.setHistory(history);
+  }
+
+  private setHistory(history: LightningModel[]) {
+    this.history = history.slice().reverse();
   }
 
 }
