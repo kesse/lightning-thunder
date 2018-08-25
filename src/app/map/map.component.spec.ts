@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { AgmCoreModule } from '@agm/core';
+import { DistancePipe } from '../distance.pipe';
 
 xdescribe('MapComponent', () => {
   let component: MapComponent;
@@ -10,7 +11,7 @@ xdescribe('MapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ],
+      declarations: [ MapComponent, DistancePipe ],
       imports: [ MaterialDesignModule, AgmCoreModule.forRoot() ]
     })
     .compileComponents();

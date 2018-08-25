@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './menu/menu.component';
 import { LightningListComponent } from './lightning-list/lightning-list.component';
 import { AboutComponent } from './about/about.component';
+import { DistancePipe } from './distance.pipe';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AboutComponent } from './about/about.component';
     MapComponent,
     MenuComponent,
     LightningListComponent,
-    AboutComponent
+    AboutComponent,
+    DistancePipe
   ],
   imports: [
     BrowserModule,

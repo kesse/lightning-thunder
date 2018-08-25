@@ -6,7 +6,7 @@
         {{ data.date | date : 'MMM d, y - HH:mm:ss'}}
       </mat-panel-title>
       <mat-panel-description>
-        {{ data.distance | number:'1.0-0' }} m
+        {{ data.distance | distance }}
         {{ data.time | number:'1.0-1' }} s
       </mat-panel-description>
     </mat-expansion-panel-header>

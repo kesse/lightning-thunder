@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LightningListComponent } from './lightning-list.component';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DistancePipe } from '../distance.pipe';
 
 describe('LightningListComponent', () => {
   const mockDialogRef = {
@@ -14,7 +15,7 @@ describe('LightningListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LightningListComponent ],
+      declarations: [ LightningListComponent, DistancePipe ],
       imports: [ MaterialDesignModule ],
       providers: [
         {
